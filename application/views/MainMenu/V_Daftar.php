@@ -79,7 +79,9 @@
                         <div class="col-md-12">
                           <div class="form-group">
                             <label class="bmd-label-floating">Jenis Layanan Medis</label>
-                            <select name="jenis_layanan" class="form-control" onchange="selectDokter(this)" >
+                            <select name="jenis_layanan" class="form-control" onchange="selectDokter(this)" required="" >
+                              <option value="">Silahkan pilih salah satu</option>
+
                               <?php 
                               if(is_array($layanan) && !empty($layanan)){
                                 foreach ($layanan as $value) {  
@@ -99,14 +101,7 @@
                         <div class="col-md-6">
                           <div class="form-group">
                             <label class="bmd-label-floating">Dokter</label>
-                            <select name="id_dokter" class="form-control"  id="id_dokter" required="">
-                              
-                      <!-- <?php foreach ($list as $value) { ?>
-                        <option value="<?php echo $value['id_dok']; ?>">
-                          <?php echo $value['nama_dokter']; ?>
-                        </option>
-                        <?php }; ?> -->
-                      </select>
+                            <select name="id_dokter" class="form-control"  id="id_dokter" required=""></select>
                     </div>
                   </div>
                 </div>

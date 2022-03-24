@@ -22,7 +22,7 @@ class C_Daftar extends CI_Controller {
 
 	public function generate($id){
 		$plaintext_string = str_replace(array('-', '_', '~'), array('+', '/', '='), $id);
-		$id = $this->encryption->decode($plaintext_string);
+		$id = $this->encryption->decrypt($plaintext_string);
 
 		$data =  array();
 		$data['list'] = $this->M_mainmenu->generate($id);
@@ -59,7 +59,7 @@ class C_Daftar extends CI_Controller {
 
 		);
 		/* Encrypt ID */
-		$encrypted_string = $this->encryption->encode($antrian);
+		$encrypted_string = $this->encryption->encrypt($antrian);
 		$id = str_replace(array('+', '/', '='), array('-', '_', '~'), $encrypted_string);
 
 		if($this->M_mainmenu->insertDaftar($data)) {
@@ -121,7 +121,7 @@ class C_Daftar extends CI_Controller {
 
 
 		$data = $this->M_mainmenu->selectJadwalDokter($where);
-		$dokter = false;
+		$dokter = [];
 
 		foreach ($data as $value) {
 			$hari = date('N');

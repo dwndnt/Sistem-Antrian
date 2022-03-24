@@ -55,7 +55,7 @@ function selectDokter(th) {
 
 	console.log(id_layanan_medis);
 	$.ajax({
-		url: base_url + "/Daftar/getDokter",
+		url: window.location.href+"/getDokter",
 		type: "POST",
 		dataType: 'json',
 		data:{id_layanan_medis:id_layanan_medis},
