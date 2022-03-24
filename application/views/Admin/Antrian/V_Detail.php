@@ -34,8 +34,8 @@
 											<hr>
 										</div>
 										<div class="form-group">
-											<label for="antrian_medis">Antrian Medis</label>
-											<h4 id="antrian_medis"><?php echo $value['antrian_medis']; ?></h4>
+											<label for="antrian_medis">Layanan Medis</label>
+											<h4 id="antrian_medis"><?php echo $value['layanan_medis']; ?></h4>
 											<hr>
 										</div>
 										<div class="form-group">

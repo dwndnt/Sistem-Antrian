@@ -278,6 +278,11 @@ class M_admin extends CI_Model {
 	}
 
 	/* -=-=-=-=-=-=-=-=-=-=- DELETE SECTION -=-=-=-=-=-=-=-=-=-=- */
+	public function deleteAntrian($id){
+		$this->db->where('id_antrian',$id);
+		return $this->db->delete('tbl_antrian');
+	}
+
 	public function deletePegawai($id){
 		$this->db->where('id_dok',$id);
 		return $this->db->delete('tbl_dokter');
