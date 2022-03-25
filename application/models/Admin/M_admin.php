@@ -37,6 +37,16 @@ class M_admin extends CI_Model {
 
 	/*-=--=-=-=-=-=-=--=-=-= SELECT MAIN SECTION -=-=-=-=-=-=-=-=-=-=-=-= */
 
+	public function getDokter(){
+		$select = array('*');
+		$this->db->select($select);
+		$this->db->from('tbl_dokter');
+
+		$data = $this->db->get();
+
+		return $data->result_array();
+	}
+
 	public function getCountAntrian(){
 		$date = date('Y-m-d');
 		$select = array('*');
@@ -245,6 +255,11 @@ class M_admin extends CI_Model {
 	}
 
 	/* -=-=-=-=-=-=-=-=-=-=- UPDATE SECTION -=-=-=-=-=-=-=-=-=-=- */
+	public function updateAntrian($id,$data){
+		$this->db->where('id_antrian',$id);
+		return $this->db->update('tbl_pendaftaran',$data);
+	}
+
 	public function updatePegawai($id,$data){
 		$this->db->where('id_dok',$id);
 		return $this->db->update('tbl_dokter',$data);

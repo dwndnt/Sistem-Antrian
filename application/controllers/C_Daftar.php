@@ -121,7 +121,7 @@ class C_Daftar extends CI_Controller {
 
 
 		$data = $this->M_mainmenu->selectJadwalDokter($where);
-		$dokter = [];
+		$dokter = false;
 
 		foreach ($data as $value) {
 			$hari = date('N');

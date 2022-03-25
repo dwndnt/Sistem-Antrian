@@ -39,7 +39,8 @@
       <div class="collapse navbar-collapse">
         <ul class="navbar-nav ml-auto">
           <li class="nav-item">
-            <a class="nav-link" href="<?php echo base_url(''); ?>"> <i class="material-icons"></i> Kembali </a>
+            <a class="nav-link" onclick="history.back()" onMouseOver="this.style.color='#000'"
+   onMouseOut="this.style.color='#555'" > <i class="material-icons"></i> Kembali </a>
           </li>
         </ul>
       </div>
@@ -70,7 +71,7 @@
                   <div class="icon icon-danger"> <i class="material-icons">person</i> </div>
                   <h4 class="info-title"><?php echo $value['nama_user']; ?></h4>
                   <h5 align="left" style="margin-left: 10px">
-                      <b>Umur :</b> <?php echo $value['umur']; ?> cm<br>
+                      <b>Umur :</b> <?php echo $value['umur']; ?> tahun<br>
                       <b>Berat Badan :</b> <?php echo $value['berat_badan']; ?> kg<br>
                       <b>Jenis Kelamin :</b> <?php echo $value['jenis_kelamin']; ?><br>
                       <b>Alamat : </b> <?php echo $value['alamat']; ?><br>  

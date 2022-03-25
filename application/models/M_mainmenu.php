@@ -9,7 +9,7 @@ class M_mainmenu extends CI_Model {
 
 /* ---------------------- DAFTAR PAGE ---------------------- */	
 	public function generate($id){
-		$this->db->select('*,tbl_pendaftaran.nama nama_user,tbl_layanan.nama layanan_kesehatan');
+		$this->db->select('*,tbl_pendaftaran.nama nama_user, tbl_pendaftaran.jenis_kelamin , tbl_layanan.nama layanan_kesehatan, tbl_pendaftaran.alamat');
 		$this->db->from('tbl_antrian');
 		$this->db->join('tbl_pendaftaran','tbl_antrian.id_antrian = tbl_pendaftaran.id_antrian', 'outter');
 		$this->db->join('tbl_dokter','tbl_dokter.id_dok = tbl_pendaftaran.id_dokter', 'outter');

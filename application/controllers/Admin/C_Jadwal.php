@@ -109,14 +109,10 @@ public function jadwalEdit($id = false) {
 		$id = $this->input->post('id_jadwal');
 		$id_dokter = $this->input->post('id_dokter');
 		$bagian = $this->input->post('bagian');
-		$hari = $this->input->post('hari');
 		$time_awal = $this->input->post('time_awal');
 		$time_akhir = $this->input->post('time_akhir');
 		$hari_pertama = $this->input->post('hari_pertama');
 		$hari_terakhir = $this->input->post('hari_terakhir');
-		
-		// $time = $time_awal." s/d ".$time_akhir;
-		
 		$data  = array(
 				'id_dokter' => $id_dokter, 
 				'bagian' => $bagian,
@@ -124,14 +120,11 @@ public function jadwalEdit($id = false) {
 				'hari_terakhir' => $hari_terakhir,
 				'jam_pertama' => $time_awal,
 				'jam_terakhir' => $time_akhir
-				);
-		// echo "<pre>";
-		// print_r($data);
-		// exit();
+		);
+
 		if($this->M_admin->updateJadwal($id,$data)) {
 			$this->session->set_flashdata('success', 'Jadwal berhasil diupdate!');
 			redirect('Jadwal/index/update');
-
 		} else {
 			$this->session->set_flashdata('error', 'Ada kesalahan pada proses data');
 			redirect('Jadwal/index/error');
