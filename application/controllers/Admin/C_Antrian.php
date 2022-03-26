@@ -14,6 +14,7 @@ class C_Antrian extends CI_Controller {
 		$this->load->library('form_validation');
 		$this->load->library('session');
 		$this->load->model('Admin/M_admin');
+		$this->load->model('M_mainmenu');
 		date_default_timezone_set("Asia/Bangkok");
 	}
 
@@ -50,25 +51,22 @@ class C_Antrian extends CI_Controller {
 
 public function antrianDetail($id = false) {
 		$plaintext_string = str_replace(array('-', '_', '~'), array('+', '/', '='), $id);
-		$plaintext_string = $this->encrypt->decode($plaintext_string);
-		
-		$data['id_antrian']	= $plaintext_string;
-		$data['list'] = $this->M_admin->getAntrian($plaintext_string);
-		$data['id'] = $id;
-
-		$this->load->view("V_Header");
-		$this->load->view("Admin/Antrian/V_Detail",$data);
-		$this->load->view("V_Footer");
+		$id = $this->encrypt->decode($plaintext_string);
+		$data =  array();
+		$data['list'] = $this->M_mainmenu->generate($id);
+		$this->load->view("MainMenu/V_Generate",$data);
 }
 
 public function antrianEdit($id = false) {
 		$plaintext_string = str_replace(array('-', '_', '~'), array('+', '/', '='), $id);
 		$plaintext_string = $this->encrypt->decode($plaintext_string);
-		
+
 		$data['id_antrian']	= $plaintext_string;
 		$data['list'] = $this->M_admin->getAntrian($plaintext_string);
+		$data['dokter'] = $this->M_admin->getDokter();
 		$data['id_dok'] = $this->M_admin->selectPegawai();
 		$data['jamkes'] = $this->M_admin->selectJamkes();
+		$data['list2'] = $this->M_mainmenu->generate($plaintext_string);
 		
 		$this->load->view("V_Header");
 		$this->load->view("Admin/Antrian/V_Edit",$data);
@@ -123,17 +121,15 @@ public function antrianEdit($id = false) {
 
 	public function updateAntrian() {
 
-		$id_pendaftaran = $this->input->post('id_pendaftaran');
+		$id_antrian = $this->input->post('id_antrian');
 		$id_dokter = $this->input->post('id_dokter');
-		$nama = $this->input->post('nama');
+		$nama = $this->input->post('nama_lengkap');
 		$umur = $this->input->post('umur');
-		$berat_badan = $this->input->post('berat_badan');
-		$jenis_kelamin = $this->input->post('jenis_kelamin');
-		$tanggal_besuk = $this->input->post('tanggal_besuk');
+		$berat_badan = $this->input->post('berat');
+		$jenis_kelamin = $this->input->post('jk');
 		$alamat = $this->input->post('alamat');
 		$penyakit = $this->input->post('penyakit');
-		$id_jamkes = $this->input->post('jamkes');
-
+		$id_jamkes = $this->input->post('id_jamkes');
 
 		$data  = array(
 			'nama' => $nama, 
@@ -141,27 +137,12 @@ public function antrianEdit($id = false) {
 			'berat_badan' => $berat_badan, 
 			'jenis_kelamin' => $jenis_kelamin, 	
 			'penyakit' => $penyakit,
-			'tanggal_besuk' => $tanggal_besuk, 	
 			'alamat' => $alamat ,
 			'id_dokter' => $id_dokter, 
 			'id_jamkes' => $id_jamkes
 		);
-		// echo "<pre>";
-		// print_r($data);
-		// exit();
 
-		/* Encrypt ID */
-		$encrypted_string = $this->encrypt->encode($antrian);
-		$id = str_replace(array('+', '/', '='), array('-', '_', '~'), $encrypted_string);
-
-		if($this->M_mainmenu->insertDaftar($data)) {
-			redirect('Daftar/generate/'.$id);
-		} else {
-			redirect('Daftar/error');
-		}
-
-		
-		if($this->M_admin->updateAntrian($id,$data)) {
+		if($this->M_admin->updateAntrian($id_antrian,$data)) {
 			$this->session->set_flashdata('success', 'Antrian berhasil diupdate!');
 			redirect('Antrian/index/update');
 		} else {

@@ -105,17 +105,17 @@ public function layananEdit($id = false) {
 /*------------------------------- UPDATE SECTION --------------------------------*/
 
 	public function updateLayanan(){
+		$id = $this->input->post('id_layanan');
+		$codelayanan = $this->input->post('code_layanan');
 		$nama = $this->input->post('nama');
 		$layanan_medis = $this->input->post('layanan_medis');
 		$info_medis = $this->input->post('info_medis');
-		$data  = array(
+		$data = array(
 				'nama' => $nama, 
 				'layanan_medis' => $layanan_medis,
-				'info_medis' => $info_medis
-				);
-		// echo "<pre>";
-		// print_r($data);
-		// exit();
+				'info_medis' => $info_medis,
+				'code_layanan' => $codelayanan,
+		);
 		if($this->M_admin->updateLayanan($id,$data)) {
 			redirect('Layanan/index/update');
 		} else {

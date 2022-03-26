@@ -35,7 +35,7 @@
           <div class="col-md-8 ml-auto mr-auto">
             <h2 class="text-center title">Daftar Antrian</h2>
             <h4 class="text-center description">Untuk mendapatkan nomor antrian, mohon untuk mengisi form dibawah ini. Pastikan biodata diisi dengan benar.</h4>
-            <form class="contact-form" method="POST" action="<?php echo base_url('Daftar/insertDaftar'); ?>">
+            <form class="contact-form" method="POST" action="<?php echo base_url('Daftar/insertDaftar'); ?> " autocomplete="off">
               <div class="row">
                 <div class="col-md-12">
                   <div class="form-group">
@@ -117,11 +117,9 @@
                   <div class="form-group">
                     <label class="bmd-label-floating">Jaminan Kesehatan</label>
                     <select name="id_jamkes" class="form-control" required="">
-                      <option>Tidak Ada</option>
                       <?php foreach ($jamkes as $value) { ?>
                       <option value="<?php echo $value['id_jamkes']; ?>">
-                        <?php echo $value['singkatan']; ?>&nbsp;(
-                        <?php echo $value['nama_jamkes']; ?>)</option>
+                        <?php echo $value['singkatan']; ?> (<?php echo $value['nama_jamkes']; ?>)</option>
                         <?php }; ?>
                       </select>
                     </div>
